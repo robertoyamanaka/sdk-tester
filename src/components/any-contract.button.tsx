@@ -4,6 +4,7 @@
 
 "use client";
 
+import { TEST_WALLET } from "@/lib/test-wallet";
 import { useCallAnyContract } from "@chipi-pay/chipi-sdk";
 import { useAuth } from "@clerk/nextjs";
 // import { cairo } from "starknet";
@@ -11,10 +12,6 @@ import { useAuth } from "@clerk/nextjs";
 export const USDC_CONTRACT =
   "0x053c91253bc9682c04929ca02ed00b3e423f6710d2ee7e0d5ebb06f3ecf368a8";
   
-const wallet = {
-  publicKey: "0x675de9d8c806e1ef53e8f36443e2953bc96ccb0fb790092d276e101bd552c41",
-  encryptedPrivateKey: "U2FsdGVkX19h2GRdiY8pTIdEFcMCiV1/QzMvL1GcICyGxJhUZfE4rK/4HoEbfHnrkdtdR+JdSa90r8fbP9lsFESZlgqxTnmamTHX8JjOrZuRvxp9oKBneD65cWPrpNKu",
-}
 
 export function AnyContractButton() {
   const { callAnyContractAsync } = useCallAnyContract();
@@ -42,7 +39,7 @@ export function AnyContractButton() {
     const transferResponse = await callAnyContractAsync({
       encryptKey: "1234",
       bearerToken: token,
-      wallet,
+      wallet: TEST_WALLET,
       calls,
       contractAddress: USDC_CONTRACT,
     });
