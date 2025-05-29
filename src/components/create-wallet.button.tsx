@@ -4,19 +4,21 @@ import { useCreateWallet, WalletData } from "@chipi-pay/chipi-sdk";
 import { useAuth } from "@clerk/nextjs";
 import { useState } from "react";
 
+const ENCRYPT_KEY = "1234";
+
 export function CreateWalletButton() {
   const { createWalletAsync } = useCreateWallet();
   const { getToken } = useAuth();
   const [createdWallet, setCreatedWallet] = useState<WalletData | null>(null);
 
   const handleCreateWallet = async () => {
-    const token = await getToken({template: "chipi-sdk"});
+    const token = await getToken({template: "chipi-sdk-2"});
     if (!token) {
       alert("No bearer token found");
       return;
     }
     const createWalletResponse = await createWalletAsync({
-      encryptKey: "1234",
+      encryptKey: ENCRYPT_KEY,
       bearerToken: token,
     });
     console.log('createWalletResponse',createWalletResponse);

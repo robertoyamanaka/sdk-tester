@@ -7,11 +7,11 @@
 import { TEST_WALLET } from "@/lib/test-wallet";
 import { useCallAnyContract } from "@chipi-pay/chipi-sdk";
 import { useAuth } from "@clerk/nextjs";
-// import { cairo } from "starknet";
 
 export const USDC_CONTRACT =
   "0x053c91253bc9682c04929ca02ed00b3e423f6710d2ee7e0d5ebb06f3ecf368a8";
   
+const destinationAddress = "0x073D8977e888C5167625CF20206dd284F215509F3c0eE284Fe5916ff6769B4e5";
 
 export function AnyContractButton() {
   const { callAnyContractAsync } = useCallAnyContract();
@@ -24,13 +24,12 @@ export function AnyContractButton() {
       return;
     }
     console.log("running transfer async")
-    // const amountBigInt = cairo.uint256(1 * 10 ** 6);
     const calls = [
       {
         contractAddress: USDC_CONTRACT,
         entrypoint: "transfer",
         calldata: [
-          "0x073D8977e888C5167625CF20206dd284F215509F3c0eE284Fe5916ff6769B4e5", // Dirección del destinatario
+          destinationAddress, // Destination address
           "0x0f4240", // 1 USDC
           "0x0"
         ]

@@ -22,7 +22,6 @@ export function StakeButton() {
       return;
     }
     console.log("running transfer async");
-    // const amountBigInt = cairo.uint256(1 * 10 ** 6);
     const transferResponse = await stakeAsync({
       encryptKey: "1234",
       bearerToken: token,
